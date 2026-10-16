@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111418">
+<title>音程チェッカー</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="app" class="state-idle">
+  <h1>音程チェッカー</h1>
+
+  <section class="note-box" aria-live="polite">
+    <div class="solfege" id="solfege">--</div>
+    <div class="sub">
+      <span id="letter">-</span><span id="octave"></span>
+      <span class="freq" id="freq">--- Hz</span>
+    </div>
+  </section>
+
+  <section class="gauge-box">
+    <svg id="gauge" viewBox="-110 -20 220 130" role="img" aria-label="音程のズレメーター">
+      <path class="arc-bg" d="M -90 0 A 90 90 0 0 1 90 0"/>
+      <path class="arc-ok" id="arcOk"/>
+      <g id="ticks"></g>
+      <g id="needle" class="needle">
+        <line x1="0" y1="0" x2="0" y2="-84"/>
+        <circle cx="0" cy="0" r="6"/>
+      </g>
+      <text x="-90" y="22" class="lbl">♭ 低い</text>
+      <text x="0" y="22" class="lbl">ちょうど</text>
+      <text x="90" y="22" class="lbl">高い ♯</text>
+    </svg>
+    <div class="cents"><span id="cents">±0</span><small> セント</small></div>
+    <div class="verdict" id="verdict">マイクを開始してください</div>
+    <div class="bar"><div class="bar-center"></div><div class="bar-dot" id="barDot"></div></div>
+  </section>
+
+  <button id="toggle" type="button">🎤 タップして開始</button>
+  <p class="msg" id="msg"></p>
+  <p class="hint">A4 = <span id="a4">440</span> Hz
+    <button type="button" class="mini" id="a4dn">−</button>
+    <button type="button" class="mini" id="a4up">＋</button>
+  </p>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
