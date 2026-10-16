@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111418">
+<title>歌の練習</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><h1>🎵 歌の練習</h1></header>
+<p class="msg" id="msg" role="alert"></p>
+
+<main>
+  <!-- 練習 -->
+  <section id="tab-practice" class="tab active">
+    <div class="row">
+      <label>練習メニュー
+        <select id="pEx"></select>
+      </label>
+      <label>開始の音
+        <select id="pBase"></select>
+      </label>
+    </div>
+    <div class="row">
+      <label>テンポ <b id="pBpmV">80</b>
+        <input type="range" id="pBpm" min="50" max="140" step="5" value="80">
+      </label>
+      <label>ガイド音
+        <select id="pGuide">
+          <option value="always">ずっと鳴らす</option>
+          <option value="first">最初の音だけ</option>
+          <option value="none">鳴らさない</option>
+        </select>
+      </label>
+    </div>
+    <div class="row slim">
+      <button type="button" class="ghost" id="pFit">音域に合わせる</button>
+      <span class="note" id="pRangeTxt"></span>
+    </div>
+    <canvas id="pCanvas"></canvas>
+    <button type="button" class="go" id="pBtn">🎤 歌ってみる</button>
+    <div id="pResult" class="result"></div>
+    <p class="note">4拍のカウントのあと開始。±50セント以内なら正解。スピーカーだとガイド音をマイクが拾うのでイヤホン推奨。オクターブ違いは正解扱いです。</p>
+  </section>
+
+  <!-- ロングトーン -->
+  <section id="tab-long" class="tab">
+    <div class="row">
+      <label>目標の音
+        <select id="lTarget"></select>
+      </label>
+    </div>
+    <div class="live"><span id="lNote">--</span><small id="lCents"></small></div>
+    <div class="count" id="lInfo">8秒間、同じ音をまっすぐ伸ばします</div>
+    <canvas id="lCanvas"></canvas>
+    <button type="button" class="go" id="lBtn">🎤 スタート</button>
+    <div id="lResult" class="result"></div>
+    <p class="note">「自動」は最初に出した音を目標にします。緑の帯は±25セント。</p>
+  </section>
+
+  <!-- 音域 -->
+  <section id="tab-range" class="tab">
+    <div class="live"><span id="rNote">--</span><small id="rCents"></small></div>
+    <div class="range-box">
+      <div><small>最低音</small><b id="rLo">--</b></div>
+      <div><small>最高音</small><b id="rHi">--</b></div>
+    </div>
+    <div class="row">
+      <button type="button" class="go" id="rBtn">🎤 測定する</button>
+    </div>
+    <p class="note">出せる一番低い音から高い音まで、ゆっくり声を動かしてください（安定して0.3秒続いた音だけ記録）。前回の記録に追加されます。</p>
+    <button type="button" class="ghost" id="rReset">記録をリセット</button>
+
+    <h2>キー提案</h2>
+    <div class="row">
+      <label>曲の最低音 <select id="kLo"></select></label>
+      <label>曲の最高音 <select id="kHi"></select></label>
+    </div>
+    <div class="result" id="kOut">先に音域を測定してください</div>
+  </section>
+
+  <!-- 記録 -->
+  <section id="tab-history" class="tab">
+    <div class="stats" id="hStats"></div>
+    <label>表示 <select id="hFilter"></select></label>
+    <canvas id="hCanvas"></canvas>
+    <ul class="hist" id="hList"></ul>
+    <button type="button" class="ghost" id="hClear">記録を全部消す</button>
+  </section>
+</main>
+
+<nav class="tabs">
+  <button type="button" data-tab="practice" class="on">🎼<span>練習</span></button>
+  <button type="button" data-tab="long">〰️<span>ロングトーン</span></button>
+  <button type="button" data-tab="range">↕️<span>音域</span></button>
+  <button type="button" data-tab="history">📈<span>記録</span></button>
+</nav>
+<script src="app.js"></script>
+</body>
+</html>
